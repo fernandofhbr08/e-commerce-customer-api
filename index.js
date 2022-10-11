@@ -9,6 +9,7 @@ app.get("/special-customer/:customer", async (req, res) => {
     try {
         const customer_id = req.params.customer;
     
+        console.log(customer_id, process.env.TOKEN, process.env.USER);
         if( !customer_id ){
             return res.json({error: true, msg: 'ID do cliente não informado.'});
         }
