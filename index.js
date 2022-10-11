@@ -9,7 +9,6 @@ app.get("/special-customer/:customer", async (req, res) => {
     try {
         const customer_id = req.params.customer;
     
-        console.log(customer_id, process.env.TOKEN, process.env.USER);
         if( !customer_id ){
             return res.json({error: true, msg: 'ID do cliente não informado.'});
         }
@@ -22,15 +21,18 @@ app.get("/special-customer/:customer", async (req, res) => {
             }
         };
     
-        const result = await axios(config);
+        const { data, status } = await axios(config);
             
-        console.log(result);
-        if( !result || typeof result !== 'object' ){
+        if( status !== 200 ){
+            return res.json({error: true, msg: `Erro ao consultar cliente. status ${status}`});
+        }
+        
+        if( !data || typeof data !== 'object' ){
             return res.json({error: true, msg: 'Erro ao consultar cliente.'});
         }
 
-        if( 'note' in result  ){
-            const { note } = result;
+        if( 'note' in data  ){
+            const { note } = data;
             if( !note || note.trim() === '' ){
                 return res.json({success: true, msg: 'Cliente normal', is_special: false});
             }else if( note.indexOf('CLIENTE_VIP') >= 0 ){
