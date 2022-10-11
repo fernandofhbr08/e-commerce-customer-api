@@ -24,6 +24,7 @@ app.get("/special-customer/:customer", async (req, res) => {
     
         const result = await axios(config);
             
+        console.log(result);
         if( !result || typeof result !== 'object' ){
             return res.json({error: true, msg: 'Erro ao consultar cliente.'});
         }
