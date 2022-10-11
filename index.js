@@ -4,7 +4,7 @@ const axios = require('axios');
 const app = express();
 const port = process.env.PORT || 3000;
 
-app.get("/valid-customer/:customer", async (req, res) => {
+app.get("/special-customer/:customer", async (req, res) => {
 
     try {
         const customer_id = req.params.customer;
