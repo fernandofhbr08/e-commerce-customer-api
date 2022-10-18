@@ -39,7 +39,7 @@ app.get("/special-customer/:customer", async (req, res) => {
             const { note } = data;
             if( !note || note.trim() === '' ){
                 return res.json({success: true, msg: 'Cliente normal', is_special: false});
-            }else if( note.indexOf('CLIENTE_VIP') >= 0 ){
+            }else if( note.indexOf('VIP') >= 0 ){
                 return res.json({success: true, msg: 'Cliente especial', is_special: true});
             }
         }
